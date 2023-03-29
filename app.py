@@ -4,7 +4,7 @@ from streamlit_option_menu import option_menu
 
 with st.sidebar:
     selected = option_menu("Main Menu", ["Home", 'OpenAI'], 
-        icons=['houses', 'gear'], menu_icon="cast", default_index=1)
+        icons=['house', 'fire'], menu_icon="cast", default_index=1)
 
 if selected == 'Home':
     st.title('ML Exhaust')

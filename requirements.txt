@@ -1,4 +1,9 @@
 notebook
 ipywidgets
 tqdm
+streamlit
+streamlit-lottie
+pandas
+openai
+streamlit-option-menu
 python-dotenv

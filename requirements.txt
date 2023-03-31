@@ -6,4 +6,4 @@ streamlit-lottie
 pandas
 openai
 streamlit-option-menu
-python-dotenv
+streamlit-chat

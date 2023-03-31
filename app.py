@@ -40,9 +40,10 @@ def openai_():
     mdlit("> ### Let's [red]first[/red] look at the Dalle API to generate some awesome images")
 
     input_text_for_image = st.text_input("Put your imagination here to generate image")
-    if st.button('Generate Image'):
-        url_img = generate_img(input_text_for_image)
-        st.info(f"View your awesome image at {url_img}")
+    if input_text_for_image:
+        if st.button('Generate Image'):
+            url_img = generate_img(input_text_for_image)
+            st.info(f"View your awesome image at {url_img}")
 
     mdlit("> ### Let's [blue]Secondly[/blue] look at ChatGPT api through which we can start a conversation")
     openai.api_key = st.secrets['api_key']
@@ -91,4 +92,3 @@ if selected == 'Home':
     home()
 elif selected == 'OpenAI':
     openai_()
-

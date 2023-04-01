@@ -86,7 +86,7 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 with st.sidebar:
-    selected = option_menu("Main Menu", ["Home", 'OpenAI'], icons=['house', 'fire'], menu_icon="cast", default_index=1)
+    selected = option_menu("Main Menu", ["Home", 'OpenAI'], icons=['house', 'fire'], menu_icon="cast", default_index=0)
 
 if selected == 'Home':
     home()

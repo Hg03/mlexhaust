@@ -29,6 +29,8 @@ def home():
     mdlit('# ML [red]Exhaust[/red] 👾')
     one, two = st.columns(2)
     mdlit("### Hi 👋, Welcome to All ML enthusiasts, My name is [green] Harish Gehlot [/green] and presently I am Data Science Intern at @([violet] Katonic.ai [/violet])(https://katonic.ai). Here In this streamlit app, I am going to implement lots of projects with [blue] basic stuff [/blue] as well a [red] complicated stuff [/red]")
+    mdlit('So what is MLExhaust ??')
+    mdlit("> It's kinda Upgrading my mind [blue]time[/blue] to [blue]time[/blue] by exploring the awesomeness of usecases of [orange]Machine Learning[/orange]")
     #st.markdown("[![LinkedIn](https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg)](https://www.linkedin.com/in/harish-gehlot-5338a021a/)",unsafe_allow_html=True)
     #st.markdown("[![Repo](https://badgen.net/badge/icon/GitHub?icon=github&label)](https://github.com/AvratanuBiswas/PubLit)",unsafe_allow_html=True)
     #st.subheader('Links')

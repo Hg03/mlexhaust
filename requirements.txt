@@ -1,6 +1,3 @@
-notebook
-ipywidgets
-tqdm
 streamlit
 streamlit-lottie
 pandas
@@ -8,3 +5,4 @@ openai
 streamlit-option-menu
 streamlit-chat
 markdownlit
+langchain

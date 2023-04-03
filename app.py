@@ -3,21 +3,12 @@ from markdownlit import mdlit
 import openai
 from streamlit_option_menu import option_menu
 from streamlit_chat import message
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
+from langchain.llms import OpenAI
+
 st.set_page_config(layout='wide',page_title='mlexhaust')
 
-
-def generate_response(prompt):
-    completions = openai.Completion.create (
-        engine="text-davinci-003",
-        prompt=prompt,
-        max_tokens=1024,
-        n=1,
-        stop=None,
-        temperature=0.5,
-    )
-
-    message = completions.choices[0].text
-    return message
 
 def generate_img(prompt):
     response = openai.Image.create(
@@ -26,7 +17,7 @@ def generate_img(prompt):
     return image_url
 
 def home():
-    mdlit('# ML [red]Exhaust[/red] 👾')
+    st.markdown('# ML [red]Exhaust[/red] 👾')
     one, two = st.columns(2)
     mdlit("### Hi 👋, Welcome to All ML enthusiasts, My name is [green] Harish Gehlot [/green] and presently I am Data Science Intern at @([violet] Katonic.ai [/violet])(https://katonic.ai). Here In this streamlit app, I am going to implement lots of projects with [blue] basic stuff [/blue] as well a [red] complicated stuff [/red]")
     mdlit('So what is MLExhaust ??')
@@ -56,15 +47,17 @@ def openai_():
     #     st.session_state['past'] = []
 
     input_text = st.text_input("You: ","Hi, What you need to talk about?", key="input")
-    # if input_text:
-    #     output = generate_response(input_text)
-    #     st.session_state.past.append(input_text)
-    #     st.session_state.generated.append(output)
+    llm = OpenAI(temperature=0.7)
+    conversation = ConversationChain(llm=llm,  memory=ConversationBufferMemory())
+    if input_text:
+        output = conversation.predict(input=input_text)
+        st.session_state.past.append(input_text)
+        st.session_state.generated.append(output)
 
-    # if st.session_state['generated']:
-    #     for i in range(len(st.session_state['generated'])-1, -1, -1):
-    #         message(st.session_state["generated"][i], key=str(i))
-    #         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+    if st.session_state['generated']:
+        for i in range(len(st.session_state['generated'])-1, -1, -1):
+            message(st.session_state["generated"][i], key=str(i))
+            message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
 
 
 

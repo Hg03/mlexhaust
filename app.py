@@ -39,7 +39,7 @@ def openai_():
             st.info(f"View your awesome image at {url_img}")
 
     mdlit("> ### Let's [blue]Secondly[/blue] look at ChatGPT api through which we can start a conversation")
-    openai.api_key = st.secrets['api_key']
+    openai.api_key = st.secrets['OPENAI_API_KEY']
     # if 'generated' not in st.session_state:
     #     st.session_state['generated'] = []
 

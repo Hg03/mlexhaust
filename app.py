@@ -26,9 +26,6 @@ def home():
     #st.markdown("[![LinkedIn](https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg)](https://www.linkedin.com/in/harish-gehlot-5338a021a/)",unsafe_allow_html=True)
     #st.markdown("[![Repo](https://badgen.net/badge/icon/GitHub?icon=github&label)](https://github.com/AvratanuBiswas/PubLit)",unsafe_allow_html=True)
     #st.subheader('Links')
-    mdlit("Social Links ⬇️")
-    mdlit('''- [LinkedIn](https://www.linkedin.com/in/harish-gehlot-5338a021a/) <br> - [Github](https://github.com/Hg03)
-	  ''')
     #mdlit(" <br> 1. @(LinkedIn)(https://www.linkedin.com/in/harish-gehlot-5338a021a/) <br> 2. @(Github)(https://github.com/Hg03) <br> 3. @(Blog)(https://mlpapers.substack.com/)")
 
 
@@ -133,6 +130,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 with st.sidebar:
     selected = option_menu("Main Menu", ["Home", 'OpenAI'], icons=['house', '0-circle'], menu_icon="cast", default_index=0)
+    st.markdown("Social Links")
 
 if selected == 'Home':
     home()

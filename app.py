@@ -130,7 +130,9 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 with st.sidebar:
     selected = option_menu("Main Menu", ["Home", 'OpenAI'], icons=['house', '0-circle'], menu_icon="cast", default_index=0)
-    st.markdown("Social Links")
+    mdlit("[blue]Social Links[/blue]")
+    mdlit("- @(linkedIn)(https://www.linkedin.com/in/harish-gehlot-5338a021a/)")
+    mdlit("- @(Github)(https://github.com/Hg03/mlexhaust)")
 
 if selected == 'Home':
     home()

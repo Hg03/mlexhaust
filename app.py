@@ -40,37 +40,32 @@ def openai_():
     #         st.info(f"View your awesome image at {url_img}")
 
     mdlit("> ### Let's [blue]Secondly[/blue] look at ChatGPT api through which we can start a conversation")
-    openai.api_key = st.secrets['OPENAI_API_KEY']
-    # if 'generated' not in st.session_state:
-    #     st.session_state['generated'] = []
+#     openai.api_key = st.secrets['OPENAI_API_KEY']
 
-    # if 'past' not in st.session_state:
-    #     st.session_state['past'] = []
-
-    if 'generated' not in st.session_state:
-        st.session_state.generated = []
-    if 'past' not in st.session_state:
-        st.session_state.past = []
-    if 'input' not in st.session_state:
-        st.session_state.input = ''
-    if 'stored_session' not in st.session_state:
-        st.session_state.stored_session = []
+#     if 'generated' not in st.session_state:
+#         st.session_state.generated = []
+#     if 'past' not in st.session_state:
+#         st.session_state.past = []
+#     if 'input' not in st.session_state:
+#         st.session_state.input = ''
+#     if 'stored_session' not in st.session_state:
+#         st.session_state.stored_session = []
 
     input_text = st.text_input("You: ","Hi, What you need to talk about?", key="input")
-    llm = OpenAI(temperature=0.7,model_name="text-davinci-003")
-    if "entity_memory" not in st.session_state:
-        st.session_state.entity_memory = ConversationEntityMemory(llm=llm,k=10)
+#     llm = OpenAI(temperature=0.7,model_name="text-davinci-003")
+#     if "entity_memory" not in st.session_state:
+#         st.session_state.entity_memory = ConversationEntityMemory(llm=llm,k=10)
     
-    CONVERSATION = ConversationChain(llm=llm,prompt=ENTITY_MEMORY_CONVERSATION_TEMPLATE,memory=st.session_state.entity_memory)
-    if input_text:
-        output = CONVERSATION.run(input=input_text)
-        st.session_state.past.append(input_text)
-        st.session_state.generated.append(output)
+#     CONVERSATION = ConversationChain(llm=llm,prompt=ENTITY_MEMORY_CONVERSATION_TEMPLATE,memory=st.session_state.entity_memory)
+#     if input_text:
+#         output = CONVERSATION.run(input=input_text)
+#         st.session_state.past.append(input_text)
+#         st.session_state.generated.append(output)
 
-    if st.session_state['generated']:
-        for i in range(len(st.session_state['generated'])-1, -1, -1):
-            message(st.session_state["generated"][i], key=str(i))
-            message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+#     if st.session_state['generated']:
+#         for i in range(len(st.session_state['generated'])-1, -1, -1):
+#             message(st.session_state["generated"][i], key=str(i))
+#             message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
 
 
 

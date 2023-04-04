@@ -18,7 +18,7 @@ def generate_img(prompt):
     return image_url
 
 def home():
-    st.markdown('# ML [red]Exhaust[/red] 👾')
+    st.markdown('# ML [red] Exhaust [/red] 👾')
     one, two = st.columns(2)
     mdlit("### Hi 👋, Welcome to All ML enthusiasts, My name is [green] Harish Gehlot [/green] and presently I am Data Science Intern at @([violet] Katonic.ai [/violet])(https://katonic.ai). Here In this streamlit app, I am going to implement lots of projects with [blue] basic stuff [/blue] as well a [red] complicated stuff [/red]")
     mdlit('So what is MLExhaust ??')
@@ -40,7 +40,7 @@ def openai_():
     #         st.info(f"View your awesome image at {url_img}")
 
     mdlit("> ### Let's [blue]Secondly[/blue] look at ChatGPT api through which we can start a conversation")
-    openai.api_key = st.secrets['api_key']
+    openai.api_key = st.secrets['OPENAI_API_KEY']
     # if 'generated' not in st.session_state:
     #     st.session_state['generated'] = []
 

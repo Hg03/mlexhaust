@@ -4,7 +4,8 @@ import openai
 from streamlit_option_menu import option_menu
 from streamlit_chat import message
 from langchain.chains import ConversationChain
-from langchain.memory import ConversationBufferMemory
+from langchain.chains.conversation.memory import ConversationEntityMemory
+from langchain.chains.conversation.prompt import ENTITY_MEMORY_CONVERSATION_TEMPLATE
 from langchain.llms import OpenAI
 
 st.set_page_config(layout='wide',page_title='mlexhaust')
@@ -30,27 +31,39 @@ def home():
 
 def openai_():
     mdlit('## [green] OpenAI [/green] exploration 🔥')
-    mdlit("> ### Let's [red]first[/red] look at the Dalle API to generate some awesome images")
+    # mdlit("> ### Let's [red]first[/red] look at the Dalle API to generate some awesome images")
 
-    input_text_for_image = st.text_input("Put your imagination here to generate image")
-    if input_text_for_image:
-        if st.button('Generate Image'):
-            url_img = generate_img(input_text_for_image)
-            st.info(f"View your awesome image at {url_img}")
+    # input_text_for_image = st.text_input("Put your imagination here to generate image")
+    # if input_text_for_image:
+    #     if st.button('Generate Image'):
+    #         url_img = generate_img(input_text_for_image)
+    #         st.info(f"View your awesome image at {url_img}")
 
     mdlit("> ### Let's [blue]Secondly[/blue] look at ChatGPT api through which we can start a conversation")
-    openai.api_key = st.secrets['OPENAI_API_KEY']
+    openai.api_key = st.secrets['api_key']
     # if 'generated' not in st.session_state:
     #     st.session_state['generated'] = []
 
     # if 'past' not in st.session_state:
     #     st.session_state['past'] = []
 
+    if 'generated' not in st.session_state:
+        st.session_state.generated = []
+    if 'past' not in st.session_state:
+        st.session_state.past = []
+    if 'input' not in st.session_state:
+        st.session_state.input = ''
+    if 'stored_session' not in st.session_state:
+        st.session_state.stored_session = []
+
     input_text = st.text_input("You: ","Hi, What you need to talk about?", key="input")
-    llm = OpenAI(temperature=0.7)
-    conversation = ConversationChain(llm=llm,  memory=ConversationBufferMemory())
+    llm = OpenAI(temperature=0.7,model_name="text-davinci-003")
+    if "entity_memory" not in st.session_state:
+        st.session_state.entity_memory = ConversationEntityMemory(llm=llm,k=10)
+    
+    CONVERSATION = ConversationChain(llm=llm,prompt=ENTITY_MEMORY_CONVERSATION_TEMPLATE,memory=st.session_state.entity_memory)
     if input_text:
-        output = conversation.predict(input=input_text)
+        output = CONVERSATION.run(input=input_text)
         st.session_state.past.append(input_text)
         st.session_state.generated.append(output)
 

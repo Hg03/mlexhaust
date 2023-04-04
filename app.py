@@ -41,9 +41,9 @@ def openai_():
     if 'stored_session' not in st.session_state:
         st.session_state.stored_session = []
     with st.expander("If you have your own OpenAI API key, or mine will exhausted"):
-        user_api_key = st.text_input(placeholder='Your API key',type='password')
-
-    if user_api_key is None:
+        user_api_key = st.text_input(label='Your API key',placeholder='Your API key',type='password')
+    try:	
+    	if user_api_key is None:
         openai.api_key = st.secrets['OPENAI_API_KEY']
         mdlit("> ### Let's [red]first[/red] look at the Dalle API to generate some awesome images")
         input_text_for_image = st.text_input("Put your imagination here to generate image")

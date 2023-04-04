@@ -18,7 +18,7 @@ def generate_img(prompt):
     return image_url
 
 def home():
-    st.markdown('# ML [red] Exhaust [/red] 👾')
+    st.markdown('# ML [red]Exhaust[/red] 👾')
     one, two = st.columns(2)
     mdlit("### Hi 👋, Welcome to All ML enthusiasts, My name is [green] Harish Gehlot [/green] and presently I am Data Science Intern at @([violet] Katonic.ai [/violet])(https://katonic.ai). Here In this streamlit app, I am going to implement lots of projects with [blue] basic stuff [/blue] as well a [red] complicated stuff [/red]")
     mdlit('So what is MLExhaust ??')

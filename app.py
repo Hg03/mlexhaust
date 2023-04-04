@@ -27,8 +27,7 @@ def home():
     #st.markdown("[![Repo](https://badgen.net/badge/icon/GitHub?icon=github&label)](https://github.com/AvratanuBiswas/PubLit)",unsafe_allow_html=True)
     #st.subheader('Links')
     mdlit("Social Links ⬇️")
-    mdlit('''- [LinkedIn](https://www.linkedin.com/in/harish-gehlot-5338a021a/) <br>
-	     - [Github](https://github.com/Hg03)
+    mdlit('''- [LinkedIn](https://www.linkedin.com/in/harish-gehlot-5338a021a/) <br> - [Github](https://github.com/Hg03)
 	  ''')
     #mdlit(" <br> 1. @(LinkedIn)(https://www.linkedin.com/in/harish-gehlot-5338a021a/) <br> 2. @(Github)(https://github.com/Hg03) <br> 3. @(Blog)(https://mlpapers.substack.com/)")
 

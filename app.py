@@ -110,6 +110,7 @@ def life_expectancy():
 	with dashboard:
 		mdlit('Beautiful [red]dashboard[\red] comes here')
         with prediction:
+		mdlit("Predict the [green]expectancy[/green] of life based on following values")
 		with st.form('prediction form'):
 			country = st.selectbox('Select your Country',[])
 			submit = st.form_submit_button('Submit')	    

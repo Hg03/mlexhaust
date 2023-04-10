@@ -104,7 +104,15 @@ def openai_():
 
 
 
-    
+def life_expectancy():
+    mdlit("## Life Expectancy [blue]Prediction[/blue]")
+    dashboard, prediction = st.tabs(['Little Analysis Dashboard','Prediction'])
+    with dashboard:
+	mdlit('Beautiful [red]dashboard[\red] comes here')
+    with prediction:
+	with st.form('prediction form'):
+	    country = st.selectbox('Select your Country',[])
+            submit = st.form_submit_button('Submit')	    
 
 
 
@@ -129,7 +137,7 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 with st.sidebar:
-    selected = option_menu("Main Menu", ["Home", 'OpenAI'], icons=['house', '0-circle'], menu_icon="cast", default_index=0)
+    selected = option_menu("Main Menu", ["Home", 'OpenAI','Life Expectancy Prediction'], icons=['house', '0-circle','settings'], menu_icon="cast", default_index=0)
     mdlit("[blue]Social Links[/blue]")
     mdlit("- @(linkedIn)(https://www.linkedin.com/in/harish-gehlot-5338a021a/)")
     mdlit("- @(Github)(https://github.com/Hg03/mlexhaust)")
@@ -138,3 +146,7 @@ if selected == 'Home':
     home()
 elif selected == 'OpenAI':
     openai_()
+elif selected == 'Life Expectancy Prediction':
+    life_expectancy()
+	
+	

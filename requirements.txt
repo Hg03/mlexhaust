@@ -6,6 +6,6 @@ streamlit-option-menu
 streamlit-chat
 markdownlit
 langchain
-pydantic
-uvicorn
-gunicorn
+plotly-express
+joblib
+scikit-learn

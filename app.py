@@ -1,5 +1,7 @@
 import streamlit as st
 from markdownlit import mdlit
+import plotly_express as px
+import pandas as pd
 import openai
 from streamlit_option_menu import option_menu
 from streamlit_chat import message
@@ -7,9 +9,16 @@ from langchain.chains import ConversationChain
 from langchain.chains.conversation.memory import ConversationEntityMemory
 from langchain.chains.conversation.prompt import ENTITY_MEMORY_CONVERSATION_TEMPLATE
 from langchain.llms import OpenAI
+import joblib
+from sklearn import model_selection, preprocessing, svm, impute, metrics
+import numpy as np
 
 st.set_page_config(layout='wide',page_title='mlexhaust')
 
+@st.cache_data
+def load_data():
+    data = pd.read_csv('data/Life-Expectancy-Data.csv')
+    return data
 
 def generate_img(prompt):
     response = openai.Image.create(
@@ -107,13 +116,50 @@ def openai_():
 def life_expectancy():
     mdlit("## Life Expectancy [blue]Prediction[/blue]")
     dashboard, prediction = st.tabs(['Little Analysis Dashboard','Prediction'])
+    df = load_data()
     with dashboard:
-	mdlit('Beautiful [red]dashboard[\red] comes here')
+        st.plotly_chart(px.pie(df,names='Year',values='Infant_deaths',title='Infant Deaths per year'))
+        st.plotly_chart(px.histogram(df,x='Country',y='Life_expectancy',color='Region',title='Life expectancy per country & region'))
+        st.plotly_chart(px.scatter(df,x='Adult_mortality',y='Alcohol_consumption',color='Year',title='Effect of alcohol consumption on adult mortality'))
     with prediction:
-	mdlit("Predict the [green]expectancy[/green] of life based on following values")
-	with st.form('prediction form'):
-	    country = st.selectbox('Select your Country',[])
-	    submit = st.form_submit_button('Submit')	    
+        mdlit("Predict the [green]expectancy[/green] of life based on following values")
+        inputs = {'Country':'','Infant_deaths':np.nan,'Under_five_deaths':np.nan,'Adult_mortality':np.nan,'Alcohol_consumption':np.nan,'Hepatitis_B':np.nan,'Measles':np.nan,'BMI':np.nan,'Polio':np.nan,'Diphtheria':np.nan,'Incidents_HIV':np.nan,'GDP_per_capita':np.nan,'Population':np.nan,'Thinness_ten_nineteen_years':np.nan,'Thinness_five_nine_years':np.nan,'Schooling':np.nan,'Economy_status_Developed':np.nan,'Economy_status_Developing':np.nan}
+        with st.form('prediction form'):
+            inputs['Country'] = st.selectbox('Select your Country',df.Country.unique().tolist())
+            inputs['Infant_deaths'] = st.slider('Amount of Infant Deaths',min_value=1.0,max_value=140.0)
+            inputs['Under_five_deaths'] = st.slider('Amount of Deaths under 5',min_value=2.0,max_value=225.0)
+            inputs['Adult_mortality'] = st.number_input('Adult Mortality Rate',1.0,1000.0)
+            inputs['Alcohol_consumption'] = st.slider('Alcohol Consumption',0.0,30.0)
+            with st.container():
+                col1, col2 = st.columns(2)
+                inputs['Hepatitis_B'] = col1.number_input('Hepatitis B',0,100)
+                inputs['Measles'] = col2.number_input('Measles',0,100)
+            inputs['BMI'] = st.slider('BMI',min_value=10.0,max_value=40.0)
+            with st.container():
+                col1, col2 = st.columns(2)
+                inputs['Polio'] = col1.number_input('Polio',min_value=0.0,max_value=100.0)
+                inputs['Diphtheria'] = col2.number_input('Diphtheria',min_value=1,max_value=100)
+            inputs['Incidents_HIV'] = st.slider('Incidenys HIV',0.1,30.0)
+            with st.container():
+                col1, col2 = st.columns(2)
+                inputs['GDP_per_capita'] = col1.number_input('GDP per capita',130,120000)
+                inputs['Population'] = col2.number_input('Population ',0.0,1400.0)
+            inputs['Thinness_ten_nineteen_years'] = st.slider('Thinness Ten Nineteen Years',0.1,30.0)
+            inputs['Thinness_five_nine_years'] = st.slider('Thinness Five Nine Years',0.1,30.0)
+            with st.container():
+                col1, col2, col3 = st.columns(3)
+                inputs['Schooling'] = col1.number_input('Schooling',1.0,20.0)
+                inputs['Economy_status_Developed'] = col2.number_input('Economy Status Developed',0,1)
+                inputs['Economy_status_Developing'] = col3.number_input('Economy Status Developing',0,1)
+
+            submit = st.form_submit_button('Submit')
+            if submit:
+                model = joblib.load('models/life_expectancy_model.joblib')
+                input_frame = pd.DataFrame([list(inputs.values())],columns=list(inputs.keys()))
+                prediction = model.predict(input)
+                st.info(f'Rate of Life Expectancy according to the model is {prediction[0]}')
+                #st.write(input_frame)
+            	    
 
 
 

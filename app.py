@@ -105,14 +105,14 @@ def openai_():
 
 
 def life_expectancy():
-    mdlit("## Life Expectancy [blue]Prediction[/blue]")
-    dashboard, prediction = st.tabs(['Little Analysis Dashboard','Prediction'])
-    with dashboard:
-	mdlit('Beautiful [red]dashboard[\red] comes here')
-    with prediction:
-	with st.form('prediction form'):
-	    country = st.selectbox('Select your Country',[])
-            submit = st.form_submit_button('Submit')	    
+	mdlit("## Life Expectancy [blue]Prediction[/blue]")
+        dashboard, prediction = st.tabs(['Little Analysis Dashboard','Prediction'])
+	with dashboard:
+		mdlit('Beautiful [red]dashboard[\red] comes here')
+        with prediction:
+		with st.form('prediction form'):
+	        country = st.selectbox('Select your Country',[])
+                submit = st.form_submit_button('Submit')	    
 
 
 

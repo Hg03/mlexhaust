@@ -106,7 +106,7 @@ def openai_():
 
 def life_expectancy():
 	mdlit("## Life Expectancy [blue]Prediction[/blue]")
-        dashboard, prediction = st.tabs(['Little Analysis Dashboard','Prediction'])
+	dashboard, prediction = st.tabs(['Little Analysis Dashboard','Prediction'])
 	with dashboard:
 		mdlit('Beautiful [red]dashboard[\red] comes here')
         with prediction:

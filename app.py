@@ -195,8 +195,8 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 with st.sidebar:
     selected = st.selectbox("📝 Main Menu", ["🏠 Home", '🔥 OpenAI','🛟 Life Expectancy Prediction'])
     mdlit("[blue]Social Links[/blue]")
-    mdlit("- @(linkedIn)(https://www.linkedin.com/in/harish-gehlot-5338a021a/)")
-    mdlit("- @(Github)(https://github.com/Hg03/mlexhaust)")
+    st.markdown("[🌐 linkedIn](https://www.linkedin.com/in/harish-gehlot-5338a021a/)")
+    mdlit("[🐱 Github](https://github.com/Hg03/mlexhaust)")
 
 if selected == '🏠 Home':
     home()

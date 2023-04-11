@@ -159,8 +159,9 @@ def life_expectancy():
                 input_frame = [list(inputs.values())]
                 data = { "data" : input_frame}
                 #prediction = model.predict(input_frame)
-                result = requests.post(st.secrets['predict_endpoint'], json = data,verify=False, headers = {"Authorization":st.secrets['token']})
-                st.info(f'Rate of Life Expectancy according to the model is {result.text}')
+		endpoint = st.secrets['predict_endpoint']
+                #result = requests.post(st.secrets['predict_endpoint'], json = data,verify=False, headers = {"Authorization":st.secrets['token']})
+                st.info(f'Rate of Life Expectancy according to the model is {endpoint}')
                 #st.write(input_frame)
             	    
 

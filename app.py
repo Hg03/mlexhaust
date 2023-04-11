@@ -163,7 +163,7 @@ def life_expectancy():
                     time.sleep(0.1)
                     if percent_complete <= round(prediction[0]):
                         my_bar.progress(percent_complete + 1,text='Rate of Life Expectancy Leads to')
-                st.write(prediction[0])
+                st.write(f'🎉 {prediction[0]} 🎉')
 
 
                 #st.info(f'Rate of Life Expectancy according to the model is {prediction[0]}')
@@ -193,16 +193,16 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 with st.sidebar:
-    selected = option_menu("Main Menu", ["Home", 'OpenAI','Life Expectancy Prediction'], icons=['house', '0-circle','settings'], menu_icon="cast", default_index=0)
+    selected = st.selectbox("📝 Main Menu", ["🏠 Home", '🔥 OpenAI','🛟 Life Expectancy Prediction'])
     mdlit("[blue]Social Links[/blue]")
     mdlit("- @(linkedIn)(https://www.linkedin.com/in/harish-gehlot-5338a021a/)")
     mdlit("- @(Github)(https://github.com/Hg03/mlexhaust)")
 
-if selected == 'Home':
+if selected == '🏠 Home':
     home()
-elif selected == 'OpenAI':
+elif selected == '🔥 OpenAI':
     openai_()
-elif selected == 'Life Expectancy Prediction':
+elif selected == '🛟 Life Expectancy Prediction':
     life_expectancy()
 	
 	

@@ -12,6 +12,7 @@ from langchain.llms import OpenAI
 import joblib
 from sklearn import model_selection, preprocessing, svm, impute, metrics
 import numpy as np
+import time
 
 st.set_page_config(layout='wide',page_title='mlexhaust')
 
@@ -157,7 +158,14 @@ def life_expectancy():
                 model = joblib.load('models/life_expectancy_model.joblib')
                 input_frame = pd.DataFrame(np.array(list(inputs.values())).reshape(1,19),columns = inputs.keys())
                 prediction = model.predict(input_frame)
-                st.info(f'Rate of Life Expectancy according to the model is {prediction[0]}')
+                my_bar = st.progress(0, text='Rate of Life Expectancy Leads to')
+                for percent_complete in range(100):
+                    time.sleep(0.1)
+                    if percent_complete <= round(prediction[0]):
+                        my_bar.progress(percent_complete + 1,text='Rate of Life Expectancy Leads to')
+
+
+                #st.info(f'Rate of Life Expectancy according to the model is {prediction[0]}')
                 #st.write(input_frame)
             	    
 

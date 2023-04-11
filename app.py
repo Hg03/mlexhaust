@@ -12,7 +12,6 @@ from langchain.llms import OpenAI
 import joblib
 from sklearn import model_selection, preprocessing, svm, impute, metrics
 import numpy as np
-import requests
 
 st.set_page_config(layout='wide',page_title='mlexhaust')
 
@@ -155,13 +154,10 @@ def life_expectancy():
 
             submit = st.form_submit_button('Submit')
             if submit:
-                #model = joblib.load('models/life_expectancy_model.joblib')
-                input_frame = [list(inputs.values())]
-                data = { "data" : input_frame}
-                #prediction = model.predict(input_frame)
-		endpoint = st.secrets['predict_endpoint']
-                #result = requests.post(st.secrets['predict_endpoint'], json = data,verify=False, headers = {"Authorization":st.secrets['token']})
-                st.info(f'Rate of Life Expectancy according to the model is {endpoint}')
+                model = joblib.load('models/life_expectancy_model.joblib')
+                input_frame = pd.DataFrame(np.array(list(inputs.values())).reshape(1,19),columns = inputs.keys())
+                prediction = model.predict(input_frame)
+                st.info(f'Rate of Life Expectancy according to the model is {prediction[0]}')
                 #st.write(input_frame)
             	    
 

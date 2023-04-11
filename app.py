@@ -12,6 +12,7 @@ from langchain.llms import OpenAI
 import joblib
 from sklearn import model_selection, preprocessing, svm, impute, metrics
 import numpy as np
+import requests
 
 st.set_page_config(layout='wide',page_title='mlexhaust')
 
@@ -143,7 +144,7 @@ def life_expectancy():
             with st.container():
                 col1, col2 = st.columns(2)
                 inputs['GDP_per_capita'] = col1.number_input('GDP per capita',130,120000)
-                inputs['Population'] = col2.number_input('Population ',0.0,1400.0)
+                inputs['Population_mln'] = col2.number_input('Population ',0.0,1400.0)
             inputs['Thinness_ten_nineteen_years'] = st.slider('Thinness Ten Nineteen Years',0.1,30.0)
             inputs['Thinness_five_nine_years'] = st.slider('Thinness Five Nine Years',0.1,30.0)
             with st.container():
@@ -154,10 +155,12 @@ def life_expectancy():
 
             submit = st.form_submit_button('Submit')
             if submit:
-                model = joblib.load('models/life_expectancy_model.joblib')
-                input_frame = pd.DataFrame([list(inputs.values())],columns=list(inputs.keys()))
-                prediction = model.predict(input)
-                st.info(f'Rate of Life Expectancy according to the model is {prediction[0]}')
+                #model = joblib.load('models/life_expectancy_model.joblib')
+                input_frame = [list(inputs.values())]
+                data = { "data" : input_frame}
+                #prediction = model.predict(input_frame)
+                result = requests.post(st.secrets['predict_endpoint'], json = data,verify=False, headers = {"Authorization":st.secrets['token']})
+                st.info(f'Rate of Life Expectancy according to the model is {result.text}')
                 #st.write(input_frame)
             	    
 

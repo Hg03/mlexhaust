@@ -163,7 +163,7 @@ def life_expectancy():
                     time.sleep(0.1)
                     if percent_complete <= round(prediction[0]):
                         my_bar.progress(percent_complete + 1,text='Rate of Life Expectancy Leads to')
-                    st.write(prediction[0])
+                st.write(prediction[0])
 
 
                 #st.info(f'Rate of Life Expectancy according to the model is {prediction[0]}')

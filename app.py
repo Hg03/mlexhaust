@@ -170,6 +170,22 @@ def life_expectancy():
                 #st.write(input_frame)
             	    
 
+def dogbreedclassification():
+    from datasets import load_dataset
+    from transformers import pipeline, AutoImageProcessor, AutoModelForImageClassification, TrainingArguments, Trainer, DefaultDataCollator
+    import evaluate
+    import numpy as np
+    from torchvision.transforms import RandomResizedCrop, Compose, Normalize, ToTensor
+    from PIL import Image
+    image_file = st.file_uploader(label='Upload an image of 🐕',type=['jpg','png'])
+    if image_file:
+        classification = pipeline("image-classification", model="harish03/DogBreedsClassifier")
+        st.image(image_file,output_format='png')
+        
+        scores = classification(Image.open(image_file))
+    
+        
+        st.write(scores)
 
 
 
@@ -193,7 +209,7 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 with st.sidebar:
-    selected = st.selectbox("📝 Main Menu", ["🏠 Home", '🔥 OpenAI','🛟 Life Expectancy Prediction'])
+    selected = st.selectbox("📝 Main Menu", ["🏠 Home", '🔥 OpenAI','🛟 Life Expectancy Prediction','🤗 Dogs Breed Classification'])
     mdlit("## **[yellow]Social Links[/yellow]** ")
     st.markdown("[🌐 linkedIn](https://www.linkedin.com/in/harish-gehlot-5338a021a/)")
     mdlit("[🐱 Github](https://github.com/Hg03/mlexhaust)")
@@ -204,5 +220,7 @@ elif selected == '🔥 OpenAI':
     openai_()
 elif selected == '🛟 Life Expectancy Prediction':
     life_expectancy()
+elif selected == '🤗 Dogs Breed Classification':
+    dogbreedclassification()
 	
 	

@@ -9,3 +9,7 @@ langchain
 plotly-express
 joblib
 scikit-learn
+transformers
+torchvision
+datasets
+evaluate

@@ -177,6 +177,7 @@ def dogbreedclassification():
     import numpy as np
     from torchvision.transforms import RandomResizedCrop, Compose, Normalize, ToTensor
     from PIL import Image
+    mdlit("## [blue] Dogs [/blue] Breed Classification  🐕")
     image_file = st.file_uploader(label='Upload an image of 🐕',type=['jpg','png'])
     if image_file:
         classification = pipeline("image-classification", model="harish03/DogBreedsClassifier")

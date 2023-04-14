@@ -179,14 +179,33 @@ def dogbreedclassification():
     from PIL import Image
     mdlit("## [blue] Dogs [/blue] Breed Classification  🐕")
     image_file = st.file_uploader(label='Upload an image of 🐕',type=['jpg','png'])
+    classification = pipeline("image-classification", model="harish03/DogBreedsClassifier")
     if image_file:
-        classification = pipeline("image-classification", model="harish03/DogBreedsClassifier")
-        st.image(image_file,output_format='png')
-        
+        st.image(image_file,output_format='png',width=300,use_column_width=True)
         scores = classification(Image.open(image_file))
-    
-        
-        st.write(scores)
+        mdlit('[green]Prediction Results[/green]')
+        with st.spinner('Wait for it... Model is analyzing'):
+            time.sleep(5)
+        one = st.progress(0,text=f"{scores[0]['label']}")
+        two = st.progress(0,text=f"{scores[1]['label']}")
+        three = st.progress(0,text=f"{scores[2]['label']}")
+        four = st.progress(0,text=f"{scores[3]['label']}")
+        five = st.progress(0,text=f"{scores[4]['label']}")
+        for i in range(100):
+            if i/100 <= scores[0]['score']:
+                one.progress(i,text=f"{scores[0]['label']} with {i} % accuracy")
+        for i in range(100):
+            if i/100 <= scores[2]['score']:
+                three.progress(i,text=f"{scores[2]['label']} with {i} % accuracy")
+        for i in range(100):
+            if i/100 <= scores[1]['score']:
+                two.progress(i,text=f"{scores[1]['label']} with {i} % accuracy")
+        for i in range(100):
+            if i/100 <= scores[4]['score']:
+                five.progress(i,text=f"{scores[4]['label']} with {i} % accuracy")
+        for i in range(100):
+            if i/100 <= scores[3]['score']:
+                four.progress(i,text=f"{scores[3]['label']} with {i} % accuracy")
 
 
 

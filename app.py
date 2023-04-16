@@ -170,7 +170,7 @@ def life_expectancy():
                 #st.write(input_frame)
             	    
 
-def dogbreedclassification():
+def catbreedclassification():
     from datasets import load_dataset
     from transformers import pipeline, AutoImageProcessor, AutoModelForImageClassification, TrainingArguments, Trainer, DefaultDataCollator
     import evaluate
@@ -178,6 +178,9 @@ def dogbreedclassification():
     from torchvision.transforms import RandomResizedCrop, Compose, Normalize, ToTensor
     from PIL import Image
     mdlit("## [blue] Cat [/blue] Breed Classification  🐱")
+    breeds = ['AFRICAN_LEOPARD','CARACAL','CHEETAH','CLOUDED_LEOPARD','JAGUAR','LION','OCELOT','PUMA','SNOW_LEOPARD','TIGER']
+    with st.expander("It is a model of Huggingface models which classifies 10 breeds of Cat"):
+	st.write(breeds)
     image_file = st.file_uploader(label='Upload an image of 🐱',type=['jpg','png'])
     classification = pipeline("image-classification", model="harish03/catbreed")
     if image_file:
@@ -242,7 +245,7 @@ elif selected == '🔥 OpenAI':
     openai_()
 elif selected == '🛟 Life Expectancy Prediction':
     life_expectancy()
-elif selected == '🤗 Dogs Breed Classification':
-    dogbreedclassification()
+elif selected == '🤗 Cats Breed Classification':
+    catbreedclassification()
 	
 	

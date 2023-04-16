@@ -177,9 +177,9 @@ def dogbreedclassification():
     import numpy as np
     from torchvision.transforms import RandomResizedCrop, Compose, Normalize, ToTensor
     from PIL import Image
-    mdlit("## [blue] Dogs [/blue] Breed Classification  🐕")
-    image_file = st.file_uploader(label='Upload an image of 🐕',type=['jpg','png'])
-    classification = pipeline("image-classification", model="harish03/DogBreedsClassifier")
+    mdlit("## [blue] Cat [/blue] Breed Classification  🐱")
+    image_file = st.file_uploader(label='Upload an image of 🐱',type=['jpg','png'])
+    classification = pipeline("image-classification", model="harish03/catbreed")
     if image_file:
         st.image(image_file,output_format='png',width=300,use_column_width=True)
         scores = classification(Image.open(image_file))
@@ -191,6 +191,8 @@ def dogbreedclassification():
         three = st.progress(0,text=f"{scores[2]['label']}")
         four = st.progress(0,text=f"{scores[3]['label']}")
         five = st.progress(0,text=f"{scores[4]['label']}")
+	
+	
         for i in range(100):
             if i/100 <= scores[0]['score']:
                 one.progress(i,text=f"{scores[0]['label']} with {i} % accuracy")

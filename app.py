@@ -180,7 +180,8 @@ def catbreedclassification():
     mdlit("## [blue] Cat [/blue] Breed Classification  🐱")
     breeds = ['AFRICAN_LEOPARD','CARACAL','CHEETAH','CLOUDED_LEOPARD','JAGUAR','LION','OCELOT','PUMA','SNOW_LEOPARD','TIGER']
     with st.expander("It is a model of Huggingface models which classifies 10 breeds of Cat"):
-	st.write(breeds)
+	    st.write(breeds)
+            
     image_file = st.file_uploader(label='Upload an image of 🐱',type=['jpg','png'])
     classification = pipeline("image-classification", model="harish03/catbreed")
     if image_file:
@@ -234,7 +235,7 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 with st.sidebar:
-    selected = st.selectbox("📝 Main Menu", ["🏠 Home", '🔥 OpenAI','🛟 Life Expectancy Prediction','🤗 Dogs Breed Classification'])
+    selected = st.selectbox("📝 Main Menu", ["🏠 Home", '🔥 OpenAI','🛟 Life Expectancy Prediction','🤗 Cat Breeds Classification'])
     mdlit("## **[yellow]Social Links[/yellow]** ")
     st.markdown("[🌐 linkedIn](https://www.linkedin.com/in/harish-gehlot-5338a021a/)")
     mdlit("[🐱 Github](https://github.com/Hg03/mlexhaust)")
@@ -245,7 +246,7 @@ elif selected == '🔥 OpenAI':
     openai_()
 elif selected == '🛟 Life Expectancy Prediction':
     life_expectancy()
-elif selected == '🤗 Cats Breed Classification':
+elif selected == '🤗 Cat Breeds Classification':
     catbreedclassification()
 	
 	
